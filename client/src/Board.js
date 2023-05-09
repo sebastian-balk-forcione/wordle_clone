@@ -1,15 +1,15 @@
 import styled from "styled-components";
 
-const Board = () => {
+const Board = ({ guessLetter }) => {
   const squares = [];
   for (let i = 0; i < 30; i++) {
-    squares.push(<Square />);
+    squares.push(<Square></Square>);
   }
 
   return (
     <Wrapper>
-      {squares.map((i) => {
-        return i;
+      {squares.map((i, index) => {
+        return <Square>{guessLetter[index]}</Square>;
       })}
     </Wrapper>
   );
