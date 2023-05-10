@@ -1,15 +1,30 @@
 import styled from "styled-components";
+import { useEffect } from "react";
 
-const Board = ({ guessedLetter }) => {
+const Board = ({ guessedLetter, turns }) => {
+  useEffect(() => {
+    console.log(turns.length);
+  }, [turns]);
+
   const squares = [];
   for (let i = 0; i < 30; i++) {
     squares.push(<Square></Square>);
   }
-
+  const defaultColor = {
+    styles: { color: "pink" },
+  };
+  console.log(turns.length);
   return (
     <Wrapper>
       {squares.map((i, index) => {
-        return <Square>{guessedLetter[index]}</Square>;
+        return (
+          <Square
+            key={index}
+            style={turns.length < 0 ? defaultColor.styles : console.log("poop")}
+          >
+            {guessedLetter[index]}
+          </Square>
+        );
       })}
     </Wrapper>
   );

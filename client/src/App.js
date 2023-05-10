@@ -6,7 +6,7 @@ import Board from "./Board";
 const App = () => {
   const [word, setWord] = useState([]);
   const [guessedLetter, setGuessedLetter] = useState([]);
-  const [turns, setTurns] = useState({});
+  const [turns, setTurns] = useState([]);
 
   useEffect(() => {
     fetch(`https://random-word-api.vercel.app/api?words=1&length=5
@@ -23,11 +23,12 @@ const App = () => {
   return (
     <Wrapper>
       <div>
-        <Board guessedLetter={guessedLetter} />
+        <Board guessedLetter={guessedLetter} turns={turns} />
         <Keyboard
           guessedLetter={guessedLetter}
           setGuessedLetter={setGuessedLetter}
           word={word}
+          setTurns={setTurns}
         ></Keyboard>
       </div>
     </Wrapper>

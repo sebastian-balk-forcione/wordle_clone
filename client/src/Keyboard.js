@@ -3,7 +3,7 @@ import letters from "../src/data/letters.json";
 import styled from "styled-components";
 import { FiDelete } from "react-icons/fi";
 
-const Keyboard = ({ guessedLetter, setGuessedLetter, word }) => {
+const Keyboard = ({ guessedLetter, setGuessedLetter, word, setTurns }) => {
   const [topRow, mdlRow, btmRow] = letters;
 
   const handleClick = (ev) => {
@@ -32,7 +32,8 @@ const Keyboard = ({ guessedLetter, setGuessedLetter, word }) => {
         } else {
           const lowerCase = wordJoined.toLowerCase().split("");
           const answer = letterChecker(lowerCase, word);
-          console.log(answer);
+          console.log(answer, word);
+          setTurns(...setTurns, answer);
         }
       })
       .catch((err) => {});
