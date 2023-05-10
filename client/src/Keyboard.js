@@ -31,8 +31,8 @@ const Keyboard = ({ guessedLetter, setGuessedLetter, word }) => {
           window.alert("Not a valid word");
         } else {
           const lowerCase = wordJoined.toLowerCase().split("");
-          letterChecker(lowerCase, word);
-          console.log(data);
+          const answer = letterChecker(lowerCase, word);
+          console.log(answer);
         }
       })
       .catch((err) => {});
