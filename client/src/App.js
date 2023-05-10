@@ -27,6 +27,7 @@ const App = () => {
         <Keyboard
           guessedLetter={guessedLetter}
           setGuessedLetter={setGuessedLetter}
+          word={word}
         ></Keyboard>
       </div>
     </Wrapper>

@@ -1,8 +1,9 @@
+import { letterChecker } from "./functions";
 import letters from "../src/data/letters.json";
 import styled from "styled-components";
 import { FiDelete } from "react-icons/fi";
 
-const Keyboard = ({ guessedLetter, setGuessedLetter }) => {
+const Keyboard = ({ guessedLetter, setGuessedLetter, word }) => {
   const [topRow, mdlRow, btmRow] = letters;
 
   const handleClick = (ev) => {
@@ -17,6 +18,24 @@ const Keyboard = ({ guessedLetter, setGuessedLetter }) => {
         (letter, index) => index !== oldValues.length - 1
       );
     });
+  };
+
+  const handleSubmit = () => {
+    const wordJoined = guessedLetter.join("");
+    fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${wordJoined}
+    `)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.title) {
+          // Temp fix
+          window.alert("Not a valid word");
+        } else {
+          const lowerCase = wordJoined.toLowerCase().split("");
+          letterChecker(lowerCase, word);
+          console.log(data);
+        }
+      })
+      .catch((err) => {});
   };
 
   return (
@@ -42,7 +61,7 @@ const Keyboard = ({ guessedLetter, setGuessedLetter }) => {
       </Rows>
 
       <Rows>
-        <button>Enter</button>
+        <button onClick={handleSubmit}>Enter</button>
         {btmRow.map((i) => {
           return (
             <button onClick={(ev) => handleClick(ev.target.textContent)}>
@@ -62,8 +81,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
-const Letters = styled.span``;
 
 const Rows = styled.div`
   display: flex;
