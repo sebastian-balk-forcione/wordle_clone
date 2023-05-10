@@ -2,15 +2,17 @@ import letters from "../src/data/letters.json";
 import styled from "styled-components";
 import { FiDelete } from "react-icons/fi";
 
-const Keyboard = ({ guessLetter, setGuessLetter }) => {
+const Keyboard = ({ guessedLetter, setGuessedLetter }) => {
   const [topRow, mdlRow, btmRow] = letters;
 
   const handleClick = (ev) => {
-    setGuessLetter((guessLetter) => [...guessLetter, ev]);
+    if (guessedLetter.length < 5) {
+      setGuessedLetter((guessedLetter) => [...guessedLetter, ev]);
+    }
   };
 
   const handleDelete = () => {
-    setGuessLetter((oldValues) => {
+    setGuessedLetter((oldValues) => {
       return oldValues.filter(
         (letter, index) => index !== oldValues.length - 1
       );
