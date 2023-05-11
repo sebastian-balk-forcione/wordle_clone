@@ -29,7 +29,7 @@ const App = () => {
           setGuessedLetter={setGuessedLetter}
           word={word}
           setTurns={setTurns}
-        ></Keyboard>
+        />
       </div>
     </Wrapper>
   );
