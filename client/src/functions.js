@@ -6,11 +6,11 @@ export const letterChecker = (guessedLetter, word) => {
       return i === e;
     });
     if (i === word[index1]) {
-      newArray.push({ status: "correct", color: "green" });
+      newArray.push({ color: "green" });
     } else if (matchedItem !== -1) {
-      newArray.push({ status: "almost correct", color: "orange" });
+      newArray.push({ color: "orange" });
     } else {
-      newArray.push({ status: "wrong", color: "grey" });
+      newArray.push({ color: "grey" });
     }
   });
   return newArray;
