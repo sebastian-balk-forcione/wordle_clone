@@ -1,27 +1,35 @@
 import styled from "styled-components";
 import { useEffect } from "react";
 
-const Board = ({ guessedLetter, turns, letterArray, setLetters, counter }) => {
-  useEffect(() => {}, [turns, guessedLetter]);
+const Board = ({
+  guessedLetter,
+  colorRoadMap,
+  letterArray,
+  setLetters,
+  counter,
+}) => {
+  useEffect(() => {}, [colorRoadMap, guessedLetter]);
 
   // Builds board squares
   const squares = [];
   for (let i = 0; i < 30; i++) {
     squares.push(<Square></Square>);
   }
-  console.log("rerender");
+
+  // colorRoadMap.length && console.log(colorRoadMap[0][0]);
   return (
     <Wrapper>
       {squares.map((i, index) => {
         return (
           <Square
             key={index}
-            style={turns.length ? turns[index] : { color: "black" }}
+            style={
+              colorRoadMap.length ? colorRoadMap[index] : { color: "black" }
+            }
           >
-            {/* The else's index is the problem - need a way to always count to 5(4)*/}
-            {turns.length > index
-              ? letterArray[counter][index]
-              : guessedLetter[index]}
+            {letterArray.length > index
+              ? letterArray[index]
+              : guessedLetter[index % 5]}
           </Square>
         );
       })}

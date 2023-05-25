@@ -1,5 +1,5 @@
 import { letterChecker } from "./functions";
-import letters from "../src/data/letters.json";
+import keys from "../src/data/keys.json";
 import styled from "styled-components";
 import { FiDelete } from "react-icons/fi";
 
@@ -7,14 +7,12 @@ const Keyboard = ({
   guessedLetter,
   setGuessedLetter,
   word,
-  setTurns,
-  turns,
+  setColorRoadMap,
+  colorRoadMap,
   setLetters,
-  lettersArray,
-  counter,
-  setCounter,
+  letterArray,
 }) => {
-  const [topRow, mdlRow, btmRow] = letters;
+  const [topRow, mdlRow, btmRow] = keys;
 
   const handleClick = (ev) => {
     // if statement to make sure that each turn doesn't go over 5 letters
@@ -33,7 +31,7 @@ const Keyboard = ({
 
   const handleSubmit = () => {
     const wordJoined = guessedLetter.join("");
-
+    console.log(wordJoined);
     // Checks if word exists...currently a bug (check "their")
     // fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${wordJoined}
     // `)
@@ -52,11 +50,14 @@ const Keyboard = ({
     //   .catch((err) => {});
     const toArray = wordJoined.split("");
     const answer = letterChecker(toArray, word);
-    console.log(answer, word);
-    setCounter(counter++);
-    setTurns(answer);
+    // setCounter((counter) => counter + 1);
+    const addMap = answer.forEach((e) => {
+      setColorRoadMap((prevAns) => [...prevAns, e]);
+    });
     setGuessedLetter([]);
-    setLetters([toArray]);
+    const eachGuess = toArray.forEach((i) => {
+      setLetters((prevLetters) => [...prevLetters, i]);
+    });
   };
 
   return (

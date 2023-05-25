@@ -15,3 +15,5 @@ export const letterChecker = (guessedLetter, word) => {
   });
   return newArray;
 };
+
+export const countToFive = (index) => {};

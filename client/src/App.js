@@ -6,14 +6,18 @@ import Board from "./Board";
 const App = () => {
   // Mock word for the purposes of coding during flight
   const [word, setWord] = useState(["S", "L", "A", "T", "E"]);
+
   // I think the counter should be used to keep track of the previous turns
   const [counter, setCounter] = useState(0);
+
   // This state keeps track of all previous guesses so that it they can render to the page
   const [letters, setLetters] = useState([]);
+
   // this state keeps tracks of the guessed letters during each turn. Gets reset after every submit
   const [guessedLetter, setGuessedLetter] = useState([]);
-  // This state delivers the color roadmap for the user, should probably rename it to something more specific
-  const [turns, setTurns] = useState([]);
+
+  // This state delivers the color roadmap for the user
+  const [colorRoadMap, setColorRoadMap] = useState([]);
 
   // useEffect(() => {
   //   fetch(`https://random-word-api.vercel.app/api?words=1&length=5
@@ -32,7 +36,7 @@ const App = () => {
       <div>
         <Board
           guessedLetter={guessedLetter}
-          turns={turns}
+          colorRoadMap={colorRoadMap}
           setLetters={setLetters}
           letterArray={letters}
           counter={counter}
@@ -41,8 +45,8 @@ const App = () => {
           guessedLetter={guessedLetter}
           setGuessedLetter={setGuessedLetter}
           word={word}
-          setTurns={setTurns}
-          turns={turns}
+          setColorRoadMap={setColorRoadMap}
+          colorRoadMap={colorRoadMap}
           setLetters={setLetters}
           letterArray={letters}
           counter={counter}
