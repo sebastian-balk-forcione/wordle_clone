@@ -1,4 +1,5 @@
 import { letterChecker } from "./functions";
+import { useEffect } from "react";
 import keys from "../src/data/keys.json";
 import styled from "styled-components";
 import { FiDelete } from "react-icons/fi";
@@ -11,13 +12,29 @@ const Keyboard = ({
   colorRoadMap,
   setLetters,
   letterArray,
+  setCounter,
+  counter,
 }) => {
+  useEffect(() => {
+    document.addEventListener("keydown", detectKeyDown);
+  }, []);
   const [topRow, mdlRow, btmRow] = keys;
 
   const handleClick = (ev) => {
     // if statement to make sure that each turn doesn't go over 5 letters
     if (guessedLetter.length < 5) {
       setGuessedLetter((guessedLetter) => [...guessedLetter, ev]);
+    }
+  };
+  const detectKeyDown = (e) => {
+    console.log(e.keyCode);
+    if (e.keyCode > 64 && e.keyCode < 91) {
+      handleClick(e.key.toUpperCase());
+    } else if (e.keyCode === 8) {
+      handleDelete();
+    } else if (e.keyCode === 13) {
+      console.log("test");
+      handleSubmit();
     }
   };
 
@@ -30,8 +47,10 @@ const Keyboard = ({
   };
 
   const handleSubmit = () => {
+    if (guessedLetter.length < 5) {
+      return;
+    }
     const wordJoined = guessedLetter.join("");
-    console.log(wordJoined);
     // Checks if word exists...currently a bug (check "their")
     // fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${wordJoined}
     // `)
@@ -50,7 +69,7 @@ const Keyboard = ({
     //   .catch((err) => {});
     const toArray = wordJoined.split("");
     const answer = letterChecker(toArray, word);
-    // setCounter((counter) => counter + 1);
+    setCounter((counter) => counter + 1);
     const addMap = answer.forEach((e) => {
       setColorRoadMap((prevAns) => [...prevAns, e]);
     });
@@ -75,7 +94,12 @@ const Keyboard = ({
       <Rows>
         {mdlRow.map((i) => {
           return (
-            <button onClick={(ev) => handleClick(ev.target.textContent)}>
+            <button
+              onClick={(ev) => handleClick(ev.target.textContent)}
+              onKeyDown={(ev) => {
+                console.log(ev);
+              }}
+            >
               {i}
             </button>
           );

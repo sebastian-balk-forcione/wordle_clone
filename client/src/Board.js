@@ -16,7 +16,6 @@ const Board = ({
     squares.push(<Square></Square>);
   }
 
-  // colorRoadMap.length && console.log(colorRoadMap[0][0]);
   return (
     <Wrapper>
       {squares.map((i, index) => {
