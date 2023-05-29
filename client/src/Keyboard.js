@@ -16,11 +16,6 @@ const Keyboard = ({
   counter,
 }) => {
   useEffect(() => {
-    // Perform actions dependent on guessedLetter state here
-    console.log(guessedLetter);
-  }, [guessedLetter]);
-
-  useEffect(() => {
     document.addEventListener("keydown", detectKeyDown);
     return () => {
       document.removeEventListener("keydown", detectKeyDown);
@@ -102,12 +97,7 @@ const Keyboard = ({
       <Rows>
         {mdlRow.map((i) => {
           return (
-            <button
-              onClick={(ev) => handleClick(ev.target.textContent)}
-              onKeyDown={(ev) => {
-                console.log(ev);
-              }}
-            >
+            <button onClick={(ev) => handleClick(ev.target.textContent)}>
               {i}
             </button>
           );

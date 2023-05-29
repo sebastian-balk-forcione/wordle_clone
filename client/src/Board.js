@@ -16,6 +16,15 @@ const Board = ({
     squares.push(<Square></Square>);
   }
 
+  const turnObject = {
+    1: [0, 1, 2, 3, 4],
+    2: [5, 6, 7, 8, 9],
+    3: [10, 11, 12, 13, 14],
+    4: [15, 16, 17, 18, 19],
+    5: [20, 21, 22, 23, 24],
+    6: [25, 26, 27, 28, 29],
+  };
+
   return (
     <Wrapper>
       {squares.map((i, index) => {
@@ -28,7 +37,9 @@ const Board = ({
           >
             {letterArray.length > index
               ? letterArray[index]
-              : guessedLetter[index % 5]}
+              : turnObject[counter][index % 5] === index
+              ? guessedLetter[index % 5]
+              : " "}
           </Square>
         );
       })}

@@ -8,7 +8,7 @@ const App = () => {
   const [word, setWord] = useState(["S", "L", "A", "T", "E"]);
 
   // I think the counter should be used to keep track of the previous turns
-  const [counter, setCounter] = useState(0);
+  const [counter, setCounter] = useState(1);
 
   // This state keeps track of all previous guesses so that it they can render to the page
   const [letters, setLetters] = useState([]);
