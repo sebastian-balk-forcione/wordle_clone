@@ -16,8 +16,17 @@ const Keyboard = ({
   counter,
 }) => {
   useEffect(() => {
+    // Perform actions dependent on guessedLetter state here
+    console.log(guessedLetter);
+  }, [guessedLetter]);
+
+  useEffect(() => {
     document.addEventListener("keydown", detectKeyDown);
-  }, []);
+    return () => {
+      document.removeEventListener("keydown", detectKeyDown);
+    };
+  }, [guessedLetter]);
+
   const [topRow, mdlRow, btmRow] = keys;
 
   const handleClick = (ev) => {
@@ -26,14 +35,13 @@ const Keyboard = ({
       setGuessedLetter((guessedLetter) => [...guessedLetter, ev]);
     }
   };
+
   const detectKeyDown = (e) => {
-    console.log(e.keyCode);
     if (e.keyCode > 64 && e.keyCode < 91) {
       handleClick(e.key.toUpperCase());
     } else if (e.keyCode === 8) {
       handleDelete();
     } else if (e.keyCode === 13) {
-      console.log("test");
       handleSubmit();
     }
   };
