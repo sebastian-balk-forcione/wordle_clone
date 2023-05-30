@@ -1,4 +1,4 @@
-import { letterChecker } from "./functions";
+import { letterChecker, hasWon } from "./functions";
 import { useEffect } from "react";
 import keys from "../src/data/keys.json";
 import styled from "styled-components";
@@ -72,6 +72,10 @@ const Keyboard = ({
     //   .catch((err) => {});
     const toArray = wordJoined.split("");
     const answer = letterChecker(toArray, word);
+    if (hasWon(answer)) {
+      window.alert("Winner");
+      return;
+    }
     setCounter((counter) => counter + 1);
     const addMap = answer.forEach((e) => {
       setColorRoadMap((prevAns) => [...prevAns, e]);

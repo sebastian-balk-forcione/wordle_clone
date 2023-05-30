@@ -5,7 +5,7 @@ import Board from "./Board";
 
 const App = () => {
   // Mock word for the purposes of coding during flight
-  const [word, setWord] = useState(["S", "L", "A", "T", "E"]);
+  const [word, setWord] = useState(["S", "W", "O", "O", "P"]);
 
   // I think the counter should be used to keep track of the previous turns
   const [counter, setCounter] = useState(1);
