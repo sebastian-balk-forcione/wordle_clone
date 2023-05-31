@@ -9,26 +9,22 @@ export const letterChecker = (guessedLetter, word) => {
     const matchedItem = word.findIndex((e) => {
       return i === e;
     });
+    const foundLetter = newArray.find((x) => x.value === i);
     if (i === word[index1]) {
-      if (
-        newArray.find((x) => x.value === i) &&
-        guessedWordDups.length > 0 &&
-        wordInPlayDups.length === 0
-      ) {
+      if (foundLetter && guessedWordDups.length > 0) {
         newArray.find((x) => {
-          if (x.value === i) {
+          if (x.value === i && !wordInPlayDups.includes(i)) {
             x.color = "grey";
           }
         });
+      } else if (foundLetter) {
       }
+      console.log("hello", foundLetter, newArray);
       newArray.push({ color: "green", value: i });
     } else if (matchedItem !== -1) {
       if (guessedWordDups.length === 0) {
         newArray.push({ color: "orange", value: i });
-      } else if (
-        newArray.find((x) => x.value === i) &&
-        wordInPlayDups.length === 0
-      ) {
+      } else if (foundLetter && wordInPlayDups.length === 0) {
         newArray.push({ color: "grey", value: i });
       } else if (wordInPlayDups.length > 0) {
         newArray.push({ color: "orange", value: i });

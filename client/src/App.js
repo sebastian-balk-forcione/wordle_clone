@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Keyboard from "./Keyboard";
 import Board from "./Board";
+import Title from "./Title";
 
 const App = () => {
   // Mock word for the purposes of coding during flight
@@ -19,6 +20,11 @@ const App = () => {
   // This state delivers the color roadmap for the user
   const [colorRoadMap, setColorRoadMap] = useState([]);
 
+  const [gameStatus, setGameStatus] = useState({
+    hasWon: false,
+    hasLost: false,
+  });
+
   // useEffect(() => {
   //   fetch(`https://random-word-api.vercel.app/api?words=1&length=5
   //   `)
@@ -34,12 +40,14 @@ const App = () => {
   return (
     <Wrapper>
       <div>
+        <Title />
         <Board
           guessedLetter={guessedLetter}
           colorRoadMap={colorRoadMap}
           setLetters={setLetters}
           letterArray={letters}
           counter={counter}
+          gameStatus={gameStatus}
         />
         <Keyboard
           guessedLetter={guessedLetter}
@@ -51,6 +59,8 @@ const App = () => {
           letterArray={letters}
           counter={counter}
           setCounter={setCounter}
+          setGameStatus={setGameStatus}
+          gameStatus={gameStatus}
         />
       </div>
     </Wrapper>

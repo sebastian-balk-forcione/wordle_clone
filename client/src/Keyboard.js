@@ -14,6 +14,8 @@ const Keyboard = ({
   letterArray,
   setCounter,
   counter,
+  gameStatus,
+  setGameStatus,
 }) => {
   useEffect(() => {
     document.addEventListener("keydown", detectKeyDown);
@@ -49,6 +51,11 @@ const Keyboard = ({
     });
   };
 
+  const findColor = (i) => {
+    const colorMap = colorRoadMap.find((x) => x.value === i);
+    return colorMap.color;
+  };
+
   const handleSubmit = () => {
     if (guessedLetter.length < 5) {
       return;
@@ -72,10 +79,7 @@ const Keyboard = ({
     //   .catch((err) => {});
     const toArray = wordJoined.split("");
     const answer = letterChecker(toArray, word);
-    if (hasWon(answer)) {
-      window.alert("Winner");
-      return;
-    }
+
     setCounter((counter) => counter + 1);
     const addMap = answer.forEach((e) => {
       setColorRoadMap((prevAns) => [...prevAns, e]);
@@ -84,14 +88,25 @@ const Keyboard = ({
     const eachGuess = toArray.forEach((i) => {
       setLetters((prevLetters) => [...prevLetters, i]);
     });
+    if (hasWon(answer)) {
+      setGameStatus({ ...gameStatus, hasWon: true });
+      window.alert("Winner");
+      return;
+    }
   };
-
   return (
     <Wrapper>
       <Rows>
         {topRow.map((i) => {
           return (
-            <button onClick={(ev) => handleClick(ev.target.textContent)}>
+            <button
+              onClick={(ev) => handleClick(ev.target.textContent)}
+              style={
+                letterArray.includes(i)
+                  ? { background: findColor(i) }
+                  : { color: "black" }
+              }
+            >
               {i}
             </button>
           );
@@ -101,7 +116,14 @@ const Keyboard = ({
       <Rows>
         {mdlRow.map((i) => {
           return (
-            <button onClick={(ev) => handleClick(ev.target.textContent)}>
+            <button
+              onClick={(ev) => handleClick(ev.target.textContent)}
+              style={
+                letterArray.includes(i)
+                  ? { background: findColor(i) }
+                  : { color: "black" }
+              }
+            >
               {i}
             </button>
           );
@@ -112,7 +134,14 @@ const Keyboard = ({
         <button onClick={handleSubmit}>Enter</button>
         {btmRow.map((i) => {
           return (
-            <button onClick={(ev) => handleClick(ev.target.textContent)}>
+            <button
+              onClick={(ev) => handleClick(ev.target.textContent)}
+              style={
+                letterArray.includes(i)
+                  ? { background: findColor(i) }
+                  : { color: "black" }
+              }
+            >
               {i}
             </button>
           );

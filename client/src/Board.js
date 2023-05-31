@@ -7,9 +7,8 @@ const Board = ({
   letterArray,
   setLetters,
   counter,
+  gameStatus,
 }) => {
-  useEffect(() => {}, [colorRoadMap, guessedLetter]);
-
   // Builds board squares
   const squares = [];
   for (let i = 0; i < 30; i++) {
@@ -59,8 +58,8 @@ const Wrapper = styled.div`
 `;
 
 const Square = styled.div`
-  width: 30px;
-  height: 30px;
-  border: 2px solid pink;
+  width: 45px;
+  height: 45px;
+  border: 2px solid lightgray;
   display: inline;
 `;
