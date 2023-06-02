@@ -110,7 +110,7 @@ const Keyboard = ({
       <Rows>
         {topRow.map((i) => {
           return (
-            <button
+            <Button
               onClick={(ev) => handleClick(ev.target.textContent)}
               style={
                 letterArray.includes(i)
@@ -119,7 +119,7 @@ const Keyboard = ({
               }
             >
               {i}
-            </button>
+            </Button>
           );
         })}
       </Rows>
@@ -127,7 +127,7 @@ const Keyboard = ({
       <Rows>
         {mdlRow.map((i) => {
           return (
-            <button
+            <Button
               onClick={(ev) => handleClick(ev.target.textContent)}
               style={
                 letterArray.includes(i)
@@ -136,16 +136,16 @@ const Keyboard = ({
               }
             >
               {i}
-            </button>
+            </Button>
           );
         })}
       </Rows>
 
       <Rows>
-        <button onClick={handleSubmit}>Enter</button>
+        <Button onClick={handleSubmit}>ENTER</Button>
         {btmRow.map((i) => {
           return (
-            <button
+            <Button
               onClick={(ev) => handleClick(ev.target.textContent)}
               style={
                 letterArray.includes(i)
@@ -154,10 +154,10 @@ const Keyboard = ({
               }
             >
               {i}
-            </button>
+            </Button>
           );
         })}
-        <button onClick={() => handleDelete()}>{<FiDelete />}</button>
+        <Button onClick={() => handleDelete()}>{<FiDelete />}</Button>
       </Rows>
     </Wrapper>
   );
@@ -170,7 +170,16 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
+const Button = styled.button`
+  all: unset;
+  width: 3.5vw;
+  padding: 5px;
+`;
+
 const Rows = styled.div`
   display: flex;
   flex-direction: row;
+  &:nth-child(1) {
+    color: "blue";
+  }
 `;

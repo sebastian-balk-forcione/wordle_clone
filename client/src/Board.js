@@ -49,6 +49,7 @@ const Board = ({
 export default Board;
 
 const Wrapper = styled.div`
+  padding: 0 9.1vw 0 11vw;
   max-width: 20vw;
   display: grid;
   grid-template-columns: repeat(5, 1fr);

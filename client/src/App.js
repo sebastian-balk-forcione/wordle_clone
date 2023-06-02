@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Keyboard from "./Keyboard";
 import Board from "./Board";
 import Title from "./Title";
+import GlobalStyles from "./GlobalStyles";
 
 const App = () => {
   // Mock word for the purposes of coding during flight
@@ -39,6 +40,7 @@ const App = () => {
 
   return (
     <Wrapper>
+      <GlobalStyles />
       <div>
         <Title />
         <Board

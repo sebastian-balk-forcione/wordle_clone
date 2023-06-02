@@ -14,10 +14,11 @@ export default Title;
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
+  margin: 5px 0 20px;
 `;
 
 const Header = styled.h1`
-  font-family: Helvetica, sans-serif;
+  font-weight: bold;
 `;
 
 const Line = styled.div`
