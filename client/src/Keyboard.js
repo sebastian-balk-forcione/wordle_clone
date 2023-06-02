@@ -52,8 +52,19 @@ const Keyboard = ({
   };
 
   const findColor = (i) => {
-    const colorMap = colorRoadMap.find((x) => x.value === i);
-    return colorMap.color;
+    const hasGreen = colorRoadMap.some((x) => {
+      if (x.value === i && x.color === "green") {
+        return true;
+      }
+    });
+
+    const colorMapBack = colorRoadMap.findLast((x) => x.value === i);
+    if (hasGreen && colorMapBack.color === "orange") {
+      console.log("what");
+      return "green";
+    } else {
+      return colorMapBack.color;
+    }
   };
 
   const handleSubmit = () => {

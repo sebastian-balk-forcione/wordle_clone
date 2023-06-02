@@ -9,7 +9,9 @@ export const letterChecker = (guessedLetter, word) => {
     const matchedItem = word.findIndex((e) => {
       return i === e;
     });
+
     const foundLetter = newArray.find((x) => x.value === i);
+
     if (i === word[index1]) {
       if (foundLetter && guessedWordDups.length > 0) {
         newArray.find((x) => {
@@ -17,9 +19,8 @@ export const letterChecker = (guessedLetter, word) => {
             x.color = "grey";
           }
         });
-      } else if (foundLetter) {
       }
-      console.log("hello", foundLetter, newArray);
+
       newArray.push({ color: "green", value: i });
     } else if (matchedItem !== -1) {
       if (guessedWordDups.length === 0) {
