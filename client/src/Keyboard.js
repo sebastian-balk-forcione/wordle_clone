@@ -1,4 +1,4 @@
-import { letterChecker, hasWon } from "./functions";
+import { letterChecker, hasWon, hasLost } from "./functions";
 import { useEffect } from "react";
 import keys from "../src/data/keys.json";
 import styled from "styled-components";
@@ -60,7 +60,6 @@ const Keyboard = ({
 
     const colorMapBack = colorRoadMap.findLast((x) => x.value === i);
     if (hasGreen && colorMapBack.color === "orange") {
-      console.log("what");
       return "green";
     } else {
       return colorMapBack.color;
@@ -103,83 +102,112 @@ const Keyboard = ({
       setGameStatus({ ...gameStatus, hasWon: true });
       window.alert("Winner");
       return;
+    } else if (hasLost(counter, answer)) {
+      window.alert("LOSER");
+      return;
     }
   };
+
   return (
-    <Wrapper>
-      <Rows>
-        {topRow.map((i) => {
-          return (
-            <Button
-              onClick={(ev) => handleClick(ev.target.textContent)}
-              style={
-                letterArray.includes(i)
-                  ? { background: findColor(i) }
-                  : { color: "black" }
-              }
-            >
-              {i}
-            </Button>
-          );
-        })}
-      </Rows>
+    <ParentWrapper>
+      <Wrapper>
+        <Rows>
+          {topRow.map((i) => {
+            return (
+              <Button
+                onClick={(ev) => handleClick(ev.target.textContent)}
+                style={
+                  letterArray.includes(i)
+                    ? { background: findColor(i) }
+                    : { color: "black" }
+                }
+              >
+                {i}
+              </Button>
+            );
+          })}
+        </Rows>
 
-      <Rows>
-        {mdlRow.map((i) => {
-          return (
-            <Button
-              onClick={(ev) => handleClick(ev.target.textContent)}
-              style={
-                letterArray.includes(i)
-                  ? { background: findColor(i) }
-                  : { color: "black" }
-              }
-            >
-              {i}
-            </Button>
-          );
-        })}
-      </Rows>
+        <Rows second>
+          {mdlRow.map((i) => {
+            return (
+              <Button
+                onClick={(ev) => handleClick(ev.target.textContent)}
+                style={
+                  letterArray.includes(i)
+                    ? { background: findColor(i) }
+                    : { color: "black" }
+                }
+              >
+                {i}
+              </Button>
+            );
+          })}
+        </Rows>
 
-      <Rows>
-        <Button onClick={handleSubmit}>ENTER</Button>
-        {btmRow.map((i) => {
-          return (
-            <Button
-              onClick={(ev) => handleClick(ev.target.textContent)}
-              style={
-                letterArray.includes(i)
-                  ? { background: findColor(i) }
-                  : { color: "black" }
-              }
-            >
-              {i}
-            </Button>
-          );
-        })}
-        <Button onClick={() => handleDelete()}>{<FiDelete />}</Button>
-      </Rows>
-    </Wrapper>
+        <Rows>
+          <Button
+            onClick={handleSubmit}
+            style={{ width: "60px", fontSize: "80%" }}
+          >
+            ENTER
+          </Button>
+          {btmRow.map((i) => {
+            return (
+              <Button
+                onClick={(ev) => handleClick(ev.target.textContent)}
+                style={
+                  letterArray.includes(i)
+                    ? { background: findColor(i) }
+                    : { color: "black" }
+                }
+              >
+                {i}
+              </Button>
+            );
+          })}
+          <Button
+            onClick={() => handleDelete()}
+            style={{ width: "55px", fontSize: "110%" }}
+          >
+            {<FiDelete />}
+          </Button>
+        </Rows>
+      </Wrapper>
+    </ParentWrapper>
   );
 };
 
 export default Keyboard;
 
+const ParentWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  /* border: 1px solid black; */
+`;
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-`;
-
-const Button = styled.button`
-  all: unset;
-  width: 3.5vw;
-  padding: 5px;
+  align-items: center;
+  /* border: 1px solid black; */
+  min-width: 550px;
 `;
 
 const Rows = styled.div`
   display: flex;
   flex-direction: row;
-  &:nth-child(1) {
-    color: "blue";
-  }
+  padding-top: 10px;
+`;
+
+const Button = styled.button`
+  all: unset;
+  width: 33px;
+  height: 45px;
+  padding: 5px;
+  text-align: center;
+  border-radius: 5px;
+  background-color: lightgray;
+  /* border: 1px solid black; */
+  margin-right: 4px;
 `;

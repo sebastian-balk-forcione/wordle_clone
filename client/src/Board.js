@@ -25,32 +25,37 @@ const Board = ({
   };
 
   return (
-    <Wrapper>
-      {squares.map((i, index) => {
-        return (
-          <Square
-            key={index}
-            style={
-              colorRoadMap.length ? colorRoadMap[index] : { color: "black" }
-            }
-          >
-            {letterArray.length > index
-              ? letterArray[index]
-              : turnObject[counter][index % 5] === index
-              ? guessedLetter[index % 5]
-              : " "}
-          </Square>
-        );
-      })}
-    </Wrapper>
+    <ParentWrapper>
+      <Wrapper>
+        {squares.map((i, index) => {
+          return (
+            <Square
+              key={index}
+              style={
+                colorRoadMap.length ? colorRoadMap[index] : { color: "black" }
+              }
+            >
+              {letterArray.length > index
+                ? letterArray[index]
+                : turnObject[counter][index % 5] === index
+                ? guessedLetter[index % 5]
+                : " "}
+            </Square>
+          );
+        })}
+      </Wrapper>
+    </ParentWrapper>
   );
 };
 
 export default Board;
 
+const ParentWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 const Wrapper = styled.div`
-  padding: 0 9.1vw 0 11vw;
-  max-width: 20vw;
+  min-width: 14%;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(6, 1fr);
@@ -59,8 +64,12 @@ const Wrapper = styled.div`
 `;
 
 const Square = styled.div`
-  width: 45px;
-  height: 45px;
+  width: 55px;
+  height: 55px;
   border: 2px solid lightgray;
   display: inline;
+  font-size: 155%;
+  text-align: center;
+  padding-top: 8px;
+  font-weight: bold;
 `;

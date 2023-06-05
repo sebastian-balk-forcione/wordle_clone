@@ -2,10 +2,12 @@ import styled from "styled-components";
 
 const Title = () => {
   return (
-    <Wrapper>
-      <Header>Wordle</Header>
-      {/* <Line></Line> */}
-    </Wrapper>
+    <div>
+      <Wrapper>
+        <Header>Wordle</Header>
+      </Wrapper>
+      <Line />
+    </div>
   );
 };
 
@@ -15,6 +17,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   margin: 5px 0 20px;
+  /* border: 1px solid black; */
 `;
 
 const Header = styled.h1`
@@ -22,6 +25,6 @@ const Header = styled.h1`
 `;
 
 const Line = styled.div`
-  width: 100vw;
-  border-bottom: 1px solid black;
+  border-bottom: 2px solid lightgray;
+  margin-bottom: 20px;
 `;

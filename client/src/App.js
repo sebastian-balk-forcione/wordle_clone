@@ -7,7 +7,7 @@ import GlobalStyles from "./GlobalStyles";
 
 const App = () => {
   // Mock word for the purposes of coding during flight
-  const [word, setWord] = useState(["S", "W", "O", "O", "P"]);
+  const [word, setWord] = useState([]);
 
   // I think the counter should be used to keep track of the previous turns
   const [counter, setCounter] = useState(1);
@@ -26,55 +26,54 @@ const App = () => {
     hasLost: false,
   });
 
-  // useEffect(() => {
-  //   fetch(`https://random-word-api.vercel.app/api?words=1&length=5
-  //   `)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setWord(data[0].split(""));
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
+  useEffect(() => {
+    fetch(`https://random-word-api.vercel.app/api?words=1&length=5
+    `)
+      .then((res) => res.json())
+      .then((data) => {
+        setWord(data[0].toUpperCase().split(""));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
-    <Wrapper>
+    <div>
       <GlobalStyles />
-      <div>
-        <Title />
-        <Board
-          guessedLetter={guessedLetter}
-          colorRoadMap={colorRoadMap}
-          setLetters={setLetters}
-          letterArray={letters}
-          counter={counter}
-          gameStatus={gameStatus}
-        />
-        <Keyboard
-          guessedLetter={guessedLetter}
-          setGuessedLetter={setGuessedLetter}
-          word={word}
-          setColorRoadMap={setColorRoadMap}
-          colorRoadMap={colorRoadMap}
-          setLetters={setLetters}
-          letterArray={letters}
-          counter={counter}
-          setCounter={setCounter}
-          setGameStatus={setGameStatus}
-          gameStatus={gameStatus}
-        />
-      </div>
-    </Wrapper>
+
+      <Title />
+      <Board
+        guessedLetter={guessedLetter}
+        colorRoadMap={colorRoadMap}
+        setLetters={setLetters}
+        letterArray={letters}
+        counter={counter}
+        gameStatus={gameStatus}
+      />
+      <Keyboard
+        guessedLetter={guessedLetter}
+        setGuessedLetter={setGuessedLetter}
+        word={word}
+        setColorRoadMap={setColorRoadMap}
+        colorRoadMap={colorRoadMap}
+        setLetters={setLetters}
+        letterArray={letters}
+        counter={counter}
+        setCounter={setCounter}
+        setGameStatus={setGameStatus}
+        gameStatus={gameStatus}
+      />
+    </div>
   );
 };
 
 export default App;
 
 const Wrapper = styled.div`
-  max-width: 100vw;
+  /* max-width: 100vw;
   max-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; */
 `;
