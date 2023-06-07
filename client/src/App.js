@@ -39,7 +39,7 @@ const App = () => {
   }, []);
 
   return (
-    <div>
+    <Wrapper>
       <GlobalStyles />
 
       <Title />
@@ -64,16 +64,14 @@ const App = () => {
         setGameStatus={setGameStatus}
         gameStatus={gameStatus}
       />
-    </div>
+    </Wrapper>
   );
 };
 
 export default App;
 
 const Wrapper = styled.div`
-  /* max-width: 100vw;
-  max-height: 100vh;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   align-items: center; */
 `;

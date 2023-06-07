@@ -49,13 +49,18 @@ const Board = ({
 };
 
 export default Board;
+const media = {
+  mobile: "@media(max-width: 330px)",
+};
 
 const ParentWrapper = styled.div`
   display: flex;
   justify-content: center;
+  ${media.mobile} {
+    background-color: blue;
+  }
 `;
 const Wrapper = styled.div`
-  min-width: 14%;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(6, 1fr);
@@ -72,4 +77,8 @@ const Square = styled.div`
   text-align: center;
   padding-top: 8px;
   font-weight: bold;
+  /* ${media.mobile} {
+    width: 16vw;
+    height: 8vh;
+  } */
 `;

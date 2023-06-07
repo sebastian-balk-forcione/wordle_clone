@@ -78,12 +78,14 @@ const Keyboard = ({
     //   .then((data) => {
     //     if (data.title) {
     //       // Temp fix
+    //       console.log(data.title);
     //       window.alert("Not a valid word");
+    //       return;
     //     } else {
+    //       console.log(data.title);
     //       const lowerCase = wordJoined.toLowerCase().split("");
     //       const answer = letterChecker(lowerCase, word);
-    //       console.log(answer, word);
-    //       setTurns(...setTurns, answer);
+    //       console.log("reaching");
     //     }
     //   })
     //   .catch((err) => {});
@@ -180,18 +182,22 @@ const Keyboard = ({
 
 export default Keyboard;
 
+const media = {
+  mobile: "@media(max-width: 530px)",
+};
+
 const ParentWrapper = styled.div`
   display: flex;
   justify-content: center;
-  /* border: 1px solid black; */
+  border: 1px solid black;
 `;
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* border: 1px solid black; */
   min-width: 550px;
+  /* border: 1px solid black; */
 `;
 
 const Rows = styled.div`
@@ -210,4 +216,8 @@ const Button = styled.button`
   background-color: lightgray;
   /* border: 1px solid black; */
   margin-right: 4px;
+  cursor: pointer;
+  /* ${media.mobile} {
+    width: 7vw;
+  } */
 `;
