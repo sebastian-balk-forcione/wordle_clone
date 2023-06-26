@@ -105,7 +105,7 @@ const Keyboard = ({
       window.alert("Winner");
       return;
     } else if (hasLost(counter, answer)) {
-      window.alert("LOSER");
+      window.alert(`You lost!`);
       return;
     }
   };
@@ -130,10 +130,10 @@ const Keyboard = ({
           })}
         </Rows>
 
-        <Rows second>
+        <Row2 second>
           {mdlRow.map((i) => {
             return (
-              <Button
+              <Button2
                 onClick={(ev) => handleClick(ev.target.textContent)}
                 style={
                   letterArray.includes(i)
@@ -142,18 +142,13 @@ const Keyboard = ({
                 }
               >
                 {i}
-              </Button>
+              </Button2>
             );
           })}
-        </Rows>
+        </Row2>
 
         <Rows>
-          <Button
-            onClick={handleSubmit}
-            style={{ width: "60px", fontSize: "80%" }}
-          >
-            ENTER
-          </Button>
+          <Enter onClick={handleSubmit}>ENTER</Enter>
           {btmRow.map((i) => {
             return (
               <Button
@@ -168,12 +163,8 @@ const Keyboard = ({
               </Button>
             );
           })}
-          <Button
-            onClick={() => handleDelete()}
-            style={{ width: "55px", fontSize: "110%" }}
-          >
-            {<FiDelete />}
-          </Button>
+
+          <Del onClick={() => handleDelete()}>{<FiDelete />}</Del>
         </Rows>
       </Wrapper>
     </ParentWrapper>
@@ -183,41 +174,91 @@ const Keyboard = ({
 export default Keyboard;
 
 const media = {
-  mobile: "@media(max-width: 530px)",
+  desktop: "@media(min-width: 500px)",
 };
 
 const ParentWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  border: 1px solid black;
+  width: 100%;
 `;
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 550px;
-  /* border: 1px solid black; */
+  width: 100vw;
 `;
 
 const Rows = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  width: 97%;
   padding-top: 10px;
+  ${media.desktop} {
+    width: 484px;
+  }
 `;
 
 const Button = styled.button`
   all: unset;
-  width: 33px;
-  height: 45px;
-  padding: 5px;
+  width: 9%;
+  height: 55px;
   text-align: center;
+  font-size: 1.15rem;
   border-radius: 5px;
   background-color: lightgray;
-  /* border: 1px solid black; */
-  margin-right: 4px;
   cursor: pointer;
+  ${media.desktop} {
+    width: 44px;
+  }
+`;
+
+const Row2 = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 88%;
+  padding-top: 10px;
+  ${media.desktop} {
+    width: 438px;
+  }
+`;
+
+const Button2 = styled.button`
+  all: unset;
+  width: 10.3%;
+  height: 55px;
+  text-align: center;
+  font-size: 1.15rem;
+  border-radius: 5px;
+  background-color: lightgray;
+  cursor: pointer;
+  ${media.desktop} {
+    width: 44px;
+  }
+`;
+
+const Enter = styled.button`
+  all: unset;
+  width: 15%;
+  font-size: 75%;
+  border-radius: 5px;
+  text-align: center;
+  margin-right: 4px;
+  background-color: lightgray;
   /* ${media.mobile} {
-    width: 7vw;
+    width: 15vw;
+  } */
+`;
+
+const Del = styled.button`
+  all: unset;
+  width: 15%;
+  font-size: 125%;
+  border-radius: 5px;
+  text-align: center;
+  background-color: lightgray;
+  /* ${media.mobile} {
+    width: 15vw;
   } */
 `;

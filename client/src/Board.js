@@ -50,15 +50,13 @@ const Board = ({
 
 export default Board;
 const media = {
-  mobile: "@media(max-width: 330px)",
+  mobile: "@media(max-width: 300px)",
 };
 
 const ParentWrapper = styled.div`
   display: flex;
   justify-content: center;
-  ${media.mobile} {
-    background-color: blue;
-  }
+  width: 100%;
 `;
 const Wrapper = styled.div`
   display: grid;
@@ -73,12 +71,13 @@ const Square = styled.div`
   height: 55px;
   border: 2px solid lightgray;
   display: inline;
-  font-size: 155%;
+  font-size: 1.5rem;
   text-align: center;
   padding-top: 8px;
   font-weight: bold;
-  /* ${media.mobile} {
-    width: 16vw;
-    height: 8vh;
-  } */
+  ${media.mobile} {
+    /* Need to adjust this */
+    max-width: 16vw;
+    max-height: calc(8vh - 10%);
+  }
 `;
