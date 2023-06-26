@@ -73,7 +73,7 @@ const Square = styled.div`
   display: inline;
   font-size: 1.5rem;
   text-align: center;
-  padding-top: 8px;
+  padding-top: 10px;
   font-weight: bold;
   ${media.mobile} {
     /* Need to adjust this */

@@ -21,19 +21,49 @@ export const letterChecker = (guessedLetter, word) => {
         });
       }
 
-      newArray.push({ color: "green", value: i });
+      newArray.push({
+        backgroundColor: "green",
+        color: "white",
+        border: "none",
+        value: i,
+      });
     } else if (matchedItem !== -1) {
       if (guessedWordDups.length === 0) {
-        newArray.push({ color: "orange", value: i });
+        newArray.push({
+          backgroundColor: "orange",
+          color: "white",
+          border: "none",
+          value: i,
+        });
       } else if (foundLetter && wordInPlayDups.length === 0) {
-        newArray.push({ color: "grey", value: i });
+        newArray.push({
+          backgroundColor: "grey",
+          color: "white",
+          border: "none",
+          value: i,
+        });
       } else if (wordInPlayDups.length > 0) {
-        newArray.push({ color: "orange", value: i });
+        newArray.push({
+          backgroundColor: "orange",
+          color: "white",
+          border: "none",
+          value: i,
+        });
       } else {
-        newArray.push({ color: "orange", value: i });
+        newArray.push({
+          backgroundColor: "orange",
+          color: "white",
+          border: "none",
+          value: i,
+        });
       }
     } else {
-      newArray.push({ color: "grey", value: i });
+      newArray.push({
+        backgroundColor: "grey",
+        color: "white",
+        border: "none",
+        value: i,
+      });
     }
   });
   return newArray;

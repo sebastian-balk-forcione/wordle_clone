@@ -62,7 +62,7 @@ const Keyboard = ({
     if (hasGreen && colorMapBack.color === "orange") {
       return "green";
     } else {
-      return colorMapBack.color;
+      return colorMapBack.backgroundColor;
     }
   };
 
