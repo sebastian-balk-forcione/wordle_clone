@@ -15,6 +15,10 @@ const Board = ({
     squares.push(<Square></Square>);
   }
 
+  // useEffect(() => {
+  //   console.log(guessedLetter.length);
+  // }, [guessedLetter]);
+
   const turnObject = {
     1: [0, 1, 2, 3, 4],
     2: [5, 6, 7, 8, 9],
@@ -34,6 +38,11 @@ const Board = ({
               style={
                 colorRoadMap.length ? colorRoadMap[index] : { color: "black" }
               }
+              counter={counter}
+              index={index}
+              turnObject={turnObject}
+              guessedLetter={guessedLetter}
+              letterArray={letterArray}
             >
               {letterArray.length > index
                 ? letterArray[index]
@@ -51,12 +60,17 @@ const Board = ({
 export default Board;
 const media = {
   mobile: "@media(max-width: 300px)",
+  smallHeight: "@media(max-height: 690px)",
 };
 
 const ParentWrapper = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
+  margin-bottom: 30px;
+  ${media.smallHeight} {
+    margin-bottom: 0;
+  }
 `;
 const Wrapper = styled.div`
   display: grid;
@@ -67,6 +81,8 @@ const Wrapper = styled.div`
 `;
 
 const Square = styled.div`
+  border-radius: ${(props) =>
+    props.guessedLetter.length === props.index % 5 ? "10px" : "100px"};
   width: 55px;
   height: 55px;
   border: 2px solid lightgray;

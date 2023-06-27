@@ -16,7 +16,7 @@ export const letterChecker = (guessedLetter, word) => {
       if (foundLetter && guessedWordDups.length > 0) {
         newArray.find((x) => {
           if (x.value === i && !wordInPlayDups.includes(i)) {
-            x.color = "grey";
+            x.color = "white";
           }
         });
       }
