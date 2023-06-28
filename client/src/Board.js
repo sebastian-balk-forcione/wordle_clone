@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { useEffect } from "react";
 
 const Board = ({
@@ -74,15 +74,28 @@ const ParentWrapper = styled.div`
 `;
 const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(6, 1fr);
-  grid-column-gap: 10px;
-  grid-row-gap: 10px;
+  grid-template: repeat(6, 1fr) / repeat(5, 1fr);
+  grid-gap: 10px 10px;
 `;
 
+// const KeyPressAnimation = keyframes`
+// 0%   {width: 55px; height: 55px}
+//   25%  {width: 67px; height: 67px}
+//   50%  {width: 70px; height: 70px}
+//   75%  {width: 67px; height: 67px}
+//   100% {width: 55px; height: 55px}`;
+
 const Square = styled.div`
-  border-radius: ${(props) =>
-    props.guessedLetter.length === props.index % 5 ? "10px" : "100px"};
+  transition: 1s, transform 2s;
+  transform: ${(props) =>
+    props.turnObject[props.counter][props.index % 5] === props.index &&
+    props.turnObject[props.counter][props.index % 5] + 1 ===
+      props.guessedLetter.length &&
+    "rotate(180deg)"};
+
+  animation-duration: 5s;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in-out;
   width: 55px;
   height: 55px;
   border: 2px solid lightgray;
