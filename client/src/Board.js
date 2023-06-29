@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 import { useEffect } from "react";
 
 const Board = ({
@@ -15,9 +15,12 @@ const Board = ({
     squares.push(<Square></Square>);
   }
 
-  // useEffect(() => {
-  //   console.log(guessedLetter.length);
-  // }, [guessedLetter]);
+  useEffect(() => {
+    document.addEventListener("keydown", detectKeyDown);
+    return () => {
+      document.removeEventListener("keydown", detectKeyDown);
+    };
+  }, [guessedLetter]);
 
   const turnObject = {
     1: [0, 1, 2, 3, 4],
@@ -26,6 +29,19 @@ const Board = ({
     4: [15, 16, 17, 18, 19],
     5: [20, 21, 22, 23, 24],
     6: [25, 26, 27, 28, 29],
+  };
+
+  const detectKeyDown = () => {
+    console.log("hello");
+    return guessedLetter.length > 5 ? false : true;
+  };
+
+  const deBugger = (turn, counter, index) => {
+    console.log(
+      turn[counter][index % 5] + 1 === guessedLetter.length,
+      turn[counter][index % 5] + 1,
+      guessedLetter.length
+    );
   };
 
   return (
@@ -43,6 +59,8 @@ const Board = ({
               turnObject={turnObject}
               guessedLetter={guessedLetter}
               letterArray={letterArray}
+              detectKeyDown={detectKeyDown}
+              deBugger={deBugger}
             >
               {letterArray.length > index
                 ? letterArray[index]
@@ -78,24 +96,41 @@ const Wrapper = styled.div`
   grid-gap: 10px 10px;
 `;
 
-// const KeyPressAnimation = keyframes`
-// 0%   {width: 55px; height: 55px}
-//   25%  {width: 67px; height: 67px}
-//   50%  {width: 70px; height: 70px}
-//   75%  {width: 67px; height: 67px}
-//   100% {width: 55px; height: 55px}`;
+const shakeAnimation = keyframes`
+0%   {transform: rotate(0)}
+10%{ transform: rotate(10deg)}
+20%{ transform: rotate(20deg)}
+30%{ transform: rotate(10deg)}
+40%{ transform: rotate(20deg)}
+50% {transform: rotate(0deg)}
+60%{ transform: rotate(-10deg)}
+70%{ transform: rotate(-20deg)}
+80%{ transform: rotate(-10deg)}
+90%{ transform: rotate(-5deg)}
+100% {transform: rotate(0)}`;
 
 const Square = styled.div`
-  transition: 1s, transform 2s;
-  transform: ${(props) =>
+  transition: transform 100ms linear;
+
+  animation: ${(props) =>
     props.turnObject[props.counter][props.index % 5] === props.index &&
     props.turnObject[props.counter][props.index % 5] + 1 ===
       props.guessedLetter.length &&
-    "rotate(180deg)"};
+    props.detectKeyDown() &&
+    css`
+      ${shakeAnimation} 300ms 1
+    `};
 
-  animation-duration: 5s;
-  animation-iteration-count: 1;
-  animation-timing-function: ease-in-out;
+  animation-timing-function: ease-out;
+  animation-delay: 100ms;
+
+  border-radius: ${(props) =>
+    props.turnObject[props.counter][props.index % 5] === props.index &&
+    (props.turnObject[props.counter][props.index % 5] + 1) % 5 ===
+      props.guessedLetter.length
+      ? // props.detectKeyDown() &&
+        "10px"
+      : props.deBugger(props.turnObject, props.counter, props.index)};
   width: 55px;
   height: 55px;
   border: 2px solid lightgray;
