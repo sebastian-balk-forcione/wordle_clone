@@ -92,20 +92,22 @@ const Keyboard = ({
     const toArray = wordJoined.split("");
     const answer = letterChecker(toArray, word);
 
-    setCounter((counter) => counter + 1);
+    setCounter((counter) => (counter < 7 ? counter + 1 : 1));
+
     const addMap = answer.forEach((e) => {
       setColorRoadMap((prevAns) => [...prevAns, e]);
     });
+
     setGuessedLetter([]);
     const eachGuess = toArray.forEach((i) => {
       setLetters((prevLetters) => [...prevLetters, i]);
     });
+
     if (hasWon(answer)) {
       setGameStatus({ ...gameStatus, hasWon: true });
-      window.alert("Winner");
       return;
     } else if (hasLost(counter, answer)) {
-      window.alert(`You lost!`);
+      setGameStatus({ ...gameStatus, hasLost: true });
       return;
     }
   };

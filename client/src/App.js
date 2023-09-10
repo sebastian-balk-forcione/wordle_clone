@@ -4,6 +4,7 @@ import Keyboard from "./Keyboard";
 import Board from "./Board";
 import Title from "./Title";
 import GlobalStyles from "./GlobalStyles";
+import Status from "./Status";
 
 const App = () => {
   // Mock word for the purposes of coding during flight
@@ -36,42 +37,56 @@ const App = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
-
+  }, [gameStatus]);
+  console.log(word, gameStatus);
   return (
-    <Wrapper>
+    <>
       <GlobalStyles />
-
-      <Title />
-      <Board
-        guessedLetter={guessedLetter}
-        colorRoadMap={colorRoadMap}
-        setLetters={setLetters}
-        letterArray={letters}
-        counter={counter}
-        gameStatus={gameStatus}
-      />
-      <Keyboard
-        guessedLetter={guessedLetter}
-        setGuessedLetter={setGuessedLetter}
-        word={word}
-        setColorRoadMap={setColorRoadMap}
-        colorRoadMap={colorRoadMap}
-        setLetters={setLetters}
-        letterArray={letters}
-        counter={counter}
-        setCounter={setCounter}
-        setGameStatus={setGameStatus}
-        gameStatus={gameStatus}
-      />
-    </Wrapper>
+      {counter === 7 ? (
+        <Status
+          setCounter={setCounter}
+          setLetters={setLetters}
+          setColorRoadMap={setColorRoadMap}
+          setGameStatus={setGameStatus}
+          gameStatus={gameStatus}
+          text={"You Lose!"}
+          hasWhat={"hasLost"}
+        />
+      ) : gameStatus.hasWon ? (
+        <Status
+          setCounter={setCounter}
+          setLetters={setLetters}
+          setColorRoadMap={setColorRoadMap}
+          setGameStatus={setGameStatus}
+          gameStatus={gameStatus}
+          text={"You Win!"}
+        />
+      ) : (
+        <>
+          <Title />
+          <Board
+            guessedLetter={guessedLetter}
+            colorRoadMap={colorRoadMap}
+            letterArray={letters}
+            counter={counter}
+          />
+          <Keyboard
+            guessedLetter={guessedLetter}
+            setGuessedLetter={setGuessedLetter}
+            word={word}
+            setColorRoadMap={setColorRoadMap}
+            colorRoadMap={colorRoadMap}
+            setLetters={setLetters}
+            letterArray={letters}
+            counter={counter}
+            setCounter={setCounter}
+            setGameStatus={setGameStatus}
+            gameStatus={gameStatus}
+          />
+        </>
+      )}
+    </>
   );
 };
 
 export default App;
-
-const Wrapper = styled.div`
-  /* display: flex;
-  flex-direction: column;
-  align-items: center; */
-`;

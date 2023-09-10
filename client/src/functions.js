@@ -78,12 +78,14 @@ const valueDuplicates = (word) => {
 };
 
 export const hasWon = (roadMap) => {
-  const answer = roadMap.every((i) => i.color === "green");
+  const answer = roadMap.every((i) => i.backgroundColor === "green");
   return answer;
 };
 
 export const hasLost = (counter, roadMap) => {
   if (counter === 6 && !hasWon(roadMap)) {
     return true;
+  } else {
+    return false;
   }
 };

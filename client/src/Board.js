@@ -1,14 +1,8 @@
 import styled, { keyframes, css } from "styled-components";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { hasLost } from "./functions";
 
-const Board = ({
-  guessedLetter,
-  colorRoadMap,
-  letterArray,
-  setLetters,
-  counter,
-  gameStatus,
-}) => {
+const Board = ({ guessedLetter, colorRoadMap, letterArray, counter }) => {
   // Builds board squares
   const squares = [];
   for (let i = 0; i < 30; i++) {
@@ -16,10 +10,7 @@ const Board = ({
   }
 
   useEffect(() => {
-    document.addEventListener("keydown", detectKeyDown);
-    return () => {
-      document.removeEventListener("keydown", detectKeyDown);
-    };
+    detectKeyDown();
   }, [guessedLetter]);
 
   const turnObject = {
@@ -32,17 +23,13 @@ const Board = ({
   };
 
   const detectKeyDown = () => {
-    console.log("hello");
     return guessedLetter.length > 5 ? false : true;
   };
 
-  const deBugger = (turn, counter, index) => {
-    console.log(
-      turn[counter][index % 5] + 1 === guessedLetter.length,
-      turn[counter][index % 5] + 1,
-      guessedLetter.length
-    );
-  };
+  // const deBugger = (turnObject, index, counter) => {
+  //   console.log(true);
+  //   // console.log(turnObject[counter][index % 5] === index);
+  // };
 
   return (
     <ParentWrapper>
@@ -60,11 +47,11 @@ const Board = ({
               guessedLetter={guessedLetter}
               letterArray={letterArray}
               detectKeyDown={detectKeyDown}
-              deBugger={deBugger}
+              hasLost={hasLost}
             >
               {letterArray.length > index
                 ? letterArray[index]
-                : turnObject[counter][index % 5] === index
+                : turnObject[counter][index % 5] == index
                 ? guessedLetter[index % 5]
                 : " "}
             </Square>
@@ -111,26 +98,19 @@ const shakeAnimation = keyframes`
 
 const Square = styled.div`
   transition: transform 100ms linear;
-
   animation: ${(props) =>
+    !props.hasLost() &&
     props.turnObject[props.counter][props.index % 5] === props.index &&
-    props.turnObject[props.counter][props.index % 5] + 1 ===
+    (props.turnObject[props.counter][props.index % 5] % 5) + 1 ===
       props.guessedLetter.length &&
-    props.detectKeyDown() &&
-    css`
-      ${shakeAnimation} 300ms 1
-    `};
-
+    props.detectKeyDown()
+      ? css`
+          ${shakeAnimation} 200ms 1
+        `
+      : "none"};
   animation-timing-function: ease-out;
   animation-delay: 100ms;
 
-  border-radius: ${(props) =>
-    props.turnObject[props.counter][props.index % 5] === props.index &&
-    (props.turnObject[props.counter][props.index % 5] + 1) % 5 ===
-      props.guessedLetter.length
-      ? // props.detectKeyDown() &&
-        "10px"
-      : props.deBugger(props.turnObject, props.counter, props.index)};
   width: 55px;
   height: 55px;
   border: 2px solid lightgray;
@@ -140,7 +120,6 @@ const Square = styled.div`
   padding-top: 10px;
   font-weight: bold;
   ${media.mobile} {
-    /* Need to adjust this */
     max-width: 16vw;
     max-height: calc(8vh - 10%);
   }
