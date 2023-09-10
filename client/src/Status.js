@@ -14,8 +14,9 @@ const Status = ({
     setCounter(1);
     setLetters([]);
     setColorRoadMap([]);
-    setGameStatus({ ...gameStatus, hasLost: false });
+    setGameStatus({ ...gameStatus, [hasWhat]: false });
   };
+
   return (
     <Wrapper>
       <Header>{text}</Header>

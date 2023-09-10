@@ -9193,6 +9193,11 @@ which@^2.0.1:
   dependencies:
     isexe "^2.0.0"
 
+word-exists@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/word-exists/-/word-exists-1.0.0.tgz#2d3e0903b085afe7bf4a3d044dabfffaf083fb52"
+  integrity sha512-uvBrbg1bjPzist7dMwRLuOn4TZojTOUgocFFbRft+RPGZuFpzuNO32PXHIKOPFKeocItfCPCkw/Nic09fKqOSA==
+
 word-wrap@^1.2.3, word-wrap@~1.2.3:
   version "1.2.3"
   resolved "https://registry.npmjs.org/word-wrap/-/word-wrap-1.2.3.tgz"

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
 import Keyboard from "./Keyboard";
 import Board from "./Board";
 import Title from "./Title";
@@ -60,6 +59,7 @@ const App = () => {
           setGameStatus={setGameStatus}
           gameStatus={gameStatus}
           text={"You Win!"}
+          hasWhat={"hasWon"}
         />
       ) : (
         <>

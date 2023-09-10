@@ -17,6 +17,7 @@ const Keyboard = ({
   gameStatus,
   setGameStatus,
 }) => {
+  const wordExists = require("word-exists");
   useEffect(() => {
     document.addEventListener("keydown", detectKeyDown);
     return () => {
@@ -71,44 +72,32 @@ const Keyboard = ({
       return;
     }
     const wordJoined = guessedLetter.join("");
-    // Checks if word exists...currently a bug (check "their")
-    // fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${wordJoined}
-    // `)
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     if (data.title) {
-    //       // Temp fix
-    //       console.log(data.title);
-    //       window.alert("Not a valid word");
-    //       return;
-    //     } else {
-    //       console.log(data.title);
-    //       const lowerCase = wordJoined.toLowerCase().split("");
-    //       const answer = letterChecker(lowerCase, word);
-    //       console.log("reaching");
-    //     }
-    //   })
-    //   .catch((err) => {});
-    const toArray = wordJoined.split("");
-    const answer = letterChecker(toArray, word);
 
-    setCounter((counter) => (counter < 7 ? counter + 1 : 1));
-
-    const addMap = answer.forEach((e) => {
-      setColorRoadMap((prevAns) => [...prevAns, e]);
-    });
-
-    setGuessedLetter([]);
-    const eachGuess = toArray.forEach((i) => {
-      setLetters((prevLetters) => [...prevLetters, i]);
-    });
-
-    if (hasWon(answer)) {
-      setGameStatus({ ...gameStatus, hasWon: true });
+    if (!wordExists(wordJoined)) {
+      window.alert("That word doesn't exist, fool!");
       return;
-    } else if (hasLost(counter, answer)) {
-      setGameStatus({ ...gameStatus, hasLost: true });
-      return;
+    } else {
+      const toArray = wordJoined.split("");
+      const answer = letterChecker(toArray, word);
+
+      setCounter((counter) => (counter < 7 ? counter + 1 : 1));
+
+      const addMap = answer.forEach((e) => {
+        setColorRoadMap((prevAns) => [...prevAns, e]);
+      });
+
+      setGuessedLetter([]);
+      const eachGuess = toArray.forEach((i) => {
+        setLetters((prevLetters) => [...prevLetters, i]);
+      });
+
+      if (hasWon(answer)) {
+        setGameStatus({ ...gameStatus, hasWon: true });
+        return;
+      } else if (hasLost(counter, answer)) {
+        setGameStatus({ ...gameStatus, hasLost: true });
+        return;
+      }
     }
   };
 
