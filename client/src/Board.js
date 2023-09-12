@@ -1,5 +1,5 @@
 import styled, { keyframes, css } from "styled-components";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { hasLost } from "./functions";
 
 const Board = ({ guessedLetter, colorRoadMap, letterArray, counter }) => {
@@ -25,11 +25,6 @@ const Board = ({ guessedLetter, colorRoadMap, letterArray, counter }) => {
   const detectKeyDown = () => {
     return guessedLetter.length > 5 ? false : true;
   };
-
-  // const deBugger = (turnObject, index, counter) => {
-  //   console.log(true);
-  //   // console.log(turnObject[counter][index % 5] === index);
-  // };
 
   return (
     <ParentWrapper>

@@ -6,7 +6,7 @@ import GlobalStyles from "./GlobalStyles";
 import Status from "./Status";
 
 const App = () => {
-  // Mock word for the purposes of coding during flight
+  // Word to guess
   const [word, setWord] = useState([]);
 
   // I think the counter should be used to keep track of the previous turns
@@ -18,7 +18,7 @@ const App = () => {
   // this state keeps tracks of the guessed letters during each turn. Gets reset after every submit
   const [guessedLetter, setGuessedLetter] = useState([]);
 
-  // This state delivers the color roadmap for the user
+  // This state delivers the color roadmap for each turn
   const [colorRoadMap, setColorRoadMap] = useState([]);
 
   const [gameStatus, setGameStatus] = useState({
@@ -37,7 +37,7 @@ const App = () => {
         console.log(err);
       });
   }, [gameStatus]);
-  console.log(word, gameStatus);
+  console.log(word);
   return (
     <>
       <GlobalStyles />
